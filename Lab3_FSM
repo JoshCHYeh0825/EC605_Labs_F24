@@ -1,0 +1,8 @@
+module switch_storage(
+    input [9:0] inp,
+    input rst,
+    output reg [9:0] outp
+    );
+    
+    
+endmodule
