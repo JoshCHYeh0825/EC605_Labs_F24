@@ -1,0 +1,58 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 10/10/2024 10:59:54 PM
+// Design Name: 
+// Module Name: store_switch_test1
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module store_switch_test1(
+    );
+    
+    reg reset;
+    reg [9:0] inp;
+    wire [9:0] outp;
+    
+    store_switch_test1 uut (.reset(reset), .inp(inp), .outp(outp));
+    
+    initial begin
+    
+        reset = 0;
+        inp = 10'b0000000000;
+
+    // Test case 1: Set switches and apply reset
+        #10 inp = 10'b1010101010;
+        #10 reset = 1;
+        #10 reset = 0;
+
+    // Test case 2: Change switches without reset
+        #20 inp = 10'b1111000000;
+
+    // Test case 3: Apply reset again
+        #20 reset = 1;
+        #10 reset = 0;
+
+    // End simulation
+        #20 $finish;
+       
+    end
+    
+    initial begin
+    $monitor("Time=%0t reset=%b switches=%b stored_value=%b", 
+             $time, reset, switches, stored_value);
+    end      
+endmodule
