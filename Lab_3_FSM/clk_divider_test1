@@ -1,0 +1,70 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 10/10/2024 10:10:17 PM
+// Design Name: 
+// Module Name: clk_divider_test1
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module clk_divider_test1(
+
+    );
+    
+    reg [9:0] inp;
+    reg rst, clk;
+    wire [9:0] outp;
+    
+    clk_divider_test1 uut(.inp(inp), .rst(rst), .clk(clk), .outp(outp));
+    
+    always begin
+        #5 clk = ~clk; //Clock triggers every 50ns
+    end
+     
+     initial begin
+     
+        clk = 0;
+        rst = 0;
+        inp = 10'b0000000000;
+        
+        //Reset Case
+        #10 rst = 1;
+        #10 rst = 0;
+        
+        
+        //Case 1: Set inputs and apply reset    
+        #20 inp = 10'b1010101010;
+        #10 rst = 1;
+        #10 rst = 0;
+        
+        //Case 2: Change inputs no reset
+        #20 inp = 10'b1111000000;
+        
+        //Case 3: Reset again
+        #20 rst = 1;
+        #20 rst =0;
+        
+        //End test
+        #20 $finish;
+      end
+      
+       // Monitor outputs
+  initial begin
+    $monitor("Time=%0t reset=%b switches=%b stored_value=%b", 
+             $time, reset, switches, stored_value);
+  end
+
+endmodule
