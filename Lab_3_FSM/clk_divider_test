@@ -34,16 +34,13 @@ module clk_divider_test();
         forever #5 clk = ~clk;  // Toggle every 5ns to create 100 MHz clock
     end
 
-    // Test stimulus
     initial begin
-        // Initialize
         rst = 1;
-        #20;  // Wait for some time
-        rst = 0;  // Release reset
+        #20;  
+        rst = 0;  
 
-        // Let the simulation run for a sufficient time to see clk_out toggle
-        #1_000_000_000;  // Simulate for 1 second
-        $stop;  // End simulation
+        #1_000_000_000;  
+        $stop;  
     end
 
 endmodule
