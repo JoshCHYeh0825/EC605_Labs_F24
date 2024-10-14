@@ -59,7 +59,7 @@ module moore_fsm(
     always @(posedge clk or posedge rst) begin
         if (rst) begin
             state <= state_init;
-            match_counter <= 0;
+            counter_101 <= 0;
             sequence <= switches; // Load switches into sequence register on reset
         end else if (switch_pause == 0) begin
             state <= state_pause; // Paused state when switch10 is low
@@ -77,7 +77,7 @@ module moore_fsm(
                 if (switch_pause == 1) begin
                     if (sequence[9:7] == 3'b101) begin // Detect "101"
                         next_state = state_101_1;
-                        match_counter = match_counter + 1;
+                        counter_101 = counter_101 + 1;
                     end
                 end
             end
@@ -86,7 +86,7 @@ module moore_fsm(
                 seg_display = 7'b1111001; // Display "1"
                 if (sequence[6:4] == 3'b101) begin
                     next_state = state_101_2;
-                    match_counter = match_counter + 1;
+                    counter_101 = counter_101 + 1;
                 end
             end
             
@@ -94,7 +94,7 @@ module moore_fsm(
                 seg_display = 7'b0100100; // Display "2"
                 if (sequence[3:1] == 3'b101) begin
                     next_state = state_101_3;
-                    match_counter = match_counter + 1;
+                    counter_101 = counter_101 + 1;
                 end
             end
             
