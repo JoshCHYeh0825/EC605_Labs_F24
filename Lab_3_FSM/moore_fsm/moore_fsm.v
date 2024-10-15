@@ -38,15 +38,12 @@ module moore_fsm(
     
     reg [2:0] state, next_state;
     reg [3:0] counter_101;
-    reg [9:0] sequence;
     
     // State 0 Initiation
     always @(posedge clk or posedge rst) begin
         if (rst) begin
             state <= state_init;
-            counter_101 <= 0;
-            sequence <= switches;
-        
+            counter_101 <= 0;        
         end else if (switch_pause == 0) begin
             state <= state_pause;
         
@@ -75,7 +72,7 @@ module moore_fsm(
             state_init: begin
                 seg_display = 7'b1000000; // Display "0"
                 if (switch_pause == 1) begin
-                    if (sequence[9:7] == 3'b101) begin // Detect "101"
+                    if (switches[9:7] == 3'b101) begin // Detect "101"
                         next_state = state_101_1;
                         counter_101 = counter_101 + 1;
                     end
@@ -84,7 +81,7 @@ module moore_fsm(
             
             state_101_1: begin
                 seg_display = 7'b1111001; // Display "1"
-                if (sequence[6:4] == 3'b101) begin
+                if (switches[6:4] == 3'b101) begin
                     next_state = state_101_2;
                     counter_101 = counter_101 + 1;
                 end
@@ -92,7 +89,7 @@ module moore_fsm(
             
             state_101_2: begin
                 seg_display = 7'b0100100; // Display "2"
-                if (sequence[3:1] == 3'b101) begin
+                if (switches[3:1] == 3'b101) begin
                     next_state = state_101_3;
                     counter_101 = counter_101 + 1;
                 end
