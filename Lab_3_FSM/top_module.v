@@ -26,9 +26,9 @@ module top_module(
     input wire [9:0] switches, // 10-bit binary sequence input
     input wire button,       // On/Off control (pause button)
     output wire [6:0] seg,   // Main seven-segment display output
-    output wire [6:0] seg1,  // Additional seven-segment display 1
-    output wire [6:0] seg2,  // Additional seven-segment display 2
-    output wire [6:0] seg3,   // Additional seven-segment display 3
+    //output wire [6:0] seg1,  // Additional seven-segment display 1
+    //output wire [6:0] seg2,  // Additional seven-segment display 2
+    //output wire [6:0] seg3,   // Additional seven-segment display 3
     output wire [3:0] led_state //LED state output
 );
 
@@ -58,15 +58,10 @@ module top_module(
         .switches(sequence_out), // Sequence input from store_switch
         .switch_pause(button),  // Pause switch (On/Off control)
         .seg_display(seg_fsm),  // Seven-segment display output
-        .led_state(led_state)   // Active state indicator
+        .led_state(sm_active)   // Active state indicator
     );
 
     // Main seven-segment display
-    assign seg = seg_fsm;
-
-    // Additional seven-segment displays for showing "ON" or "OFF"
-    assign seg1 = sm_active ? 7'b1000110 : 7'b1111110; // 'O' or ' ' (blank)
-    assign seg2 = sm_active ? 7'b0000110 : 7'b1111110; // 'N' or ' ' (blank)
-    assign seg3 = sm_active ? 7'b1111111 : 7'b0001110; // ' ' (blank) or 'F'
-
+    assign seg = sm_active ? seg_fsm : 7'b0001110;
+  
 endmodule
