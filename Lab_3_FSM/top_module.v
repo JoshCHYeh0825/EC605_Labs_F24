@@ -29,6 +29,7 @@ module top_module(
     output wire [6:0] seg1,  // Additional seven-segment display 1
     output wire [6:0] seg2,  // Additional seven-segment display 2
     output wire [6:0] seg3   // Additional seven-segment display 3
+    output wire [3:0] led_state //LED state output
 );
 
     wire clk_1hz;           // Clock divider output (1 Hz clock)
@@ -57,7 +58,7 @@ module top_module(
         .switches(sequence_out), // Sequence input from store_switch
         .switch_pause(button),  // Pause switch (On/Off control)
         .seg_display(seg_fsm),  // Seven-segment display output
-        .led_state(sm_active)   // Active state indicator
+        .led_state(led_state)   // Active state indicator
     );
 
     // Main seven-segment display
