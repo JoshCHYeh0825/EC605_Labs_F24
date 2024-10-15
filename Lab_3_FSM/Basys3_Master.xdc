@@ -78,7 +78,7 @@ set_property PACKAGE_PIN T3 [get_ports {switches[9]}]
 #	set_property IOSTANDARD LVCMOS33 [get_ports {LED[15]}]
 	
 	
-# Main seven-segment display (seg)
+# 7 segment display
 set_property PACKAGE_PIN W7 [get_ports {seg[0]}]   # Segment 'a'
 set_property IOSTANDARD LVCMOS33 [get_ports {seg[0]}]
 set_property PACKAGE_PIN W6 [get_ports {seg[1]}]   # Segment 'b'
@@ -93,6 +93,14 @@ set_property PACKAGE_PIN V5 [get_ports {seg[5]}]   # Segment 'f'
 set_property IOSTANDARD LVCMOS33 [get_ports {seg[5]}]
 set_property PACKAGE_PIN U7 [get_ports {seg[6]}]   # Segment 'g'
 set_property IOSTANDARD LVCMOS33 [get_ports {seg[6]}]
+
+# Additional 7 segment displays (seg1, seg2, seg3)
+set_property PACKAGE_PIN W6 [get_ports {seg1[0]}]  # Segment 'a' of seg1
+set_property IOSTANDARD LVCMOS33 [get_ports {seg1[0]}]
+set_property PACKAGE_PIN U8 [get_ports {seg2[0]}]  # Segment 'a' of seg2
+set_property IOSTANDARD LVCMOS33 [get_ports {seg2[0]}]
+set_property PACKAGE_PIN V8 [get_ports {seg3[0]}]  # Segment 'a' of seg3
+set_property IOSTANDARD LVCMOS33 [get_ports {seg3[0]}]
 
 #set_property PACKAGE_PIN V7 [get_ports dp]							
 #	set_property IOSTANDARD LVCMOS33 [get_ports dp]
