@@ -57,7 +57,6 @@ module moore_fsm(
         if (rst) begin
             state <= state_init;
             counter_101 <= 0;
-            sequence <= switches; // Load switches into sequence register on reset
         end else if (switch_pause == 0) begin
             state <= state_pause; // Paused state when switch10 is low
         end else begin
