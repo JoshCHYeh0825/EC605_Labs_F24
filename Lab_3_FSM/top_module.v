@@ -64,8 +64,7 @@ module top_module(
   // Output the seven-segment display
     assign seg = seg_fsm;
     
-    // Optionally, use three more seven-segment displays to indicate ON/OFF state
-    // for debugging or display purposes (if needed).
+    // Three seven-segment displays to indicate ON/OFF state
     assign seg1 = sm_active ? 7'b1000110 : 7'b1111110; // 'O' or ' '
     assign seg2 = sm_active ? 7'b0000110 : 7'b1111110; // 'N' or ' '
     assign seg3 = sm_active ? 7'b0111111 : 7'b1111110; // 'F' or ' '
