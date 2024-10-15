@@ -148,7 +148,6 @@ set_property PACKAGE_PIN T18 [get_ports button]
 	#set_property IOSTANDARD LVCMOS33 [get_ports {JA[7]}]
 
 
-
 ##Pmod Header JB
 ##Sch name = JB1
 #set_property PACKAGE_PIN A14 [get_ports {JB[0]}]					
