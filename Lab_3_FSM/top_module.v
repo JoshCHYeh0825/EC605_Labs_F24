@@ -28,7 +28,7 @@ module top_module(
     output wire [6:0] seg,   // Main seven-segment display output
     output wire [6:0] seg1,  // Additional seven-segment display 1
     output wire [6:0] seg2,  // Additional seven-segment display 2
-    output wire [6:0] seg3   // Additional seven-segment display 3
+    output wire [6:0] seg3,   // Additional seven-segment display 3
     output wire [3:0] led_state //LED state output
 );
 
