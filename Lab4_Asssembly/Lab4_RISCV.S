@@ -16,21 +16,26 @@ addi x3, zero, 2 # x3 <= i = 2 of for "i" in range (For loop, i = counter)
 addi x4, zero, 32 # x4 <= 32 (Loop limit)
 
 fib_sequence:
- # To start the sequence, load sequences [i-1] and [i-2]
- lw x5, -4(x2) # x5 <= Seq[i-1]
- lw x6, -8(x2) # x6 <= Seq[i-2]
+# To start the sequence, load sequences [i-1] and [i-2]
+lw x5, -4(x2) # x5 <= Seq[i-1]
+lw x6, -8(x2) # x6 <= Seq[i-2]
 
- # Generate Seq[i] as Seq[i] = Seq[i-1] + Seq[i-2]
- add x7, x6, x5 # x7 <= x5 + x6 
+# Generate Seq[i] as Seq[i] = Seq[i-1] + Seq[i-2]
+add x7, x6, x5 # x7 <= x5 + x6 
 
- # Store value of Seq[i] into memory starting with 0x80
- sw x7, 0(x2) # MEM[0 + x2] <= x7 (Seq[i])
+# Store value of Seq[i] into memory starting with 0x80
+sw x7, 0(x2) # MEM[0 + x2] <= x7 (Seq[i])
 
- # Update counter and next memory address
- addi x2, x2, 4 # x2 <= x2 + 4 (Just like incrementing PC)
- addi x3, x3, 1 # x3 <= x3 + 1 (incrementing i, just like i++)
+# Update counter and next memory address
+addi x2, x2, 4 # x2 <= x2 + 4 (Just like incrementing PC)
+addi x3, x3, 1 # x3 <= x3 + 1 (incrementing i, just like i++)
 
- # End loop when i is 32
- bne x3, x4, fib_sequence # if(x3 != 32, counter is not 32 then branch to fib_sequence)
+# End loop when i is 32
+bne x3, x4, fib_sequence # if(x3 != 32, counter is not 32 then branch to fib_sequence)
 
 end:
+
+
+
+
+
