@@ -6,7 +6,7 @@
 #Step 1: Assign Seq[1] = 1 to x1
 li x1, 1 # x1 <= 1
 
-# Step 2: Load 0x80 onto empty register as memory address
+# Step 2: Load 0x80 onto an empty register as memory address
 li x2, 0x80 #x2 <= 0x80 
 
 #Step 3: Store Seq[0] at MEM[0x80]
