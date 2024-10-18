@@ -13,7 +13,7 @@ sw x1, 4(x2) # MEM[0x84] <= (Seq[1] = 1, 0x84 because 4-bytes per instruction)
 
 # Loop counter
 addi x3, zero, 2 # x3 <= i = 2 of for "i" in range (For loop, i = counter)
-addi x4, zero, 32 # x4 <= 32 (Loop limit)
+addi x4, zero, 33 # x4 <= 32 (Loop limit)
 
 # Address register to store the value of last iteration
 addi x5, x2, 4 # x5 <= x2 + 4, address of Seq[1]
@@ -22,7 +22,7 @@ addi x6, x2, 0 # x6 <= x2, address of Seq[0]
 fib_sequence:
   # To start the sequence, load Seq[i-1] and Seq[i-2]
   lw x7, 0(x5) # x7 <= Seq[i-1]
-  lw x8, 0(x5) # x8 <= Seq[i-2]
+  lw x8, 0(x6) # x8 <= Seq[i-2]
 
   # Generate Seq[i] as Seq[i] = Seq[i-1] + Seq[i-2]
   add x9, x7, x8 # x9 <= x7 + x8 
