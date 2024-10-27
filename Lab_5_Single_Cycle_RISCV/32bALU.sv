@@ -23,16 +23,16 @@ always @(*) begin
         4'b0100: result = a << b[4:0];     // Logical shift left
         4'b0101: begin                     // Subtract
             result = a - b;
-            c = (a < b);                   // Set carry if borrow occurred
-            v = ((a[31] != b[31]) && (result[31] != a[31])); // Overflow if signs mismatch
+           c = (a < b);                   // Set carry for a subtraction
+           v = ((a[31] != b[31]) && (result[31] != a[31])); // Overflow if signs aren't matched
         end
         4'b0110: begin                     // Add
             result = a + b;
-            c = (result < a);              // Set carry if overflow occurred (unsigned)
-            v = ((a[31] == b[31]) && (result[31] != a[31])); // Overflow if signs mismatch
+           c = (result < a);              // Set carry if overflow
+           v = ((a[31] == b[31]) && (result[31] != a[31])); // Overflow if signs aren't matched
         end
         4'b0111: result = (a < b) ? 1 : 0; // Set less than
-        default: result = 32'b0;           // Default to 0 if unhandled
+        default: result = 32'b0;           // Default to 0
     endcase
 
     // Set negative flag
