@@ -7,7 +7,6 @@
 
 	reg [BITSIZE-1:0] memory_file [0:REGSIZE-1];	// Entire list of memory
 
-
 	// Asyncronous read of memory. Was not specified.
 	always @(Address, memory_file[Address])
 	begin
