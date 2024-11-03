@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 
 module Control_Unit (
+    
     input [6:0] OP,
     input [2:0] FUNCT3,
     input [2:0] FUNCT7,
