@@ -49,7 +49,7 @@ module Datapath(clk, rst);
     wire [3:0] ALU_Control;
     
     Control_Unit CU ( 
-        .Instruction(ReadInstruction[6:0]),
+        .Instruction(ReadInstruction[31:0]),
         .ALUOp(ALU_Control),
         .Branch(Branch),
         .MemRead(MemRead),
@@ -72,6 +72,10 @@ module Datapath(clk, rst);
     wire [31:0] ReadRegData1, ReadRegData2;
     wire [31:0] WriteRegData;
     
+    assign ReadReg1Address = ReadInstruction[19:15]; // rs1
+    assign ReadReg2Address = ReadInstruction[24:20]; // rs2
+    assign WriteRegAddress = ReadInstruction[11:7];  // rd
+    
     Register_File #(.BITSIZE(32), .REGSIZE(32)) RF(
         .clk(clk),
         .rst(rst), 
@@ -91,7 +95,7 @@ module Datapath(clk, rst);
 
     wire [31:0] ALU1, ALU2;
     wire [31:0] ALU_Out;
-    wire zero;
+    wire zero, n, c, v;
 
     assign ALU1 = ReadRegData1;
     assign ALU2 = ALU_Src ? Immediate : ReadRegData2;
@@ -115,7 +119,7 @@ module Datapath(clk, rst);
     wire select_branch;
        
     Branch_Control BC(
-        .branch(Branch),
+        .branch(select_branch),
         .FUNCT3(ReadInstruction[14:12]),
         .zero_flag (zero),
         .n(n),
@@ -135,7 +139,7 @@ module Datapath(clk, rst);
         .clk(clk),
         .rst(rst),
         .Address(ALU_Out),
-        .WriteData(ReadRegData2),
+        .WriteData(WriteRegData),
         .MemRead(MemRead),
         .MemWrite(MemWrite),
         .ReadData(ReadMemData)

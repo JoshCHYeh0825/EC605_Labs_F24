@@ -11,8 +11,7 @@ module Register_File(ReadSelect1, ReadSelect2, WriteSelect, WriteData, WriteEnab
 
     reg [BITSIZE-1:0] reg_file [REGSIZE-1:0];   // Entire list of registers
     
-    initial
-    begin
+    initial begin
         reg_file[0] = 32'b0; // initialize x0 as 0;
     end
     integer i;                                  // Used below to rst all registers
@@ -33,7 +32,8 @@ module Register_File(ReadSelect1, ReadSelect2, WriteSelect, WriteData, WriteEnab
     always @(posedge clk)
         begin
             if (rst)
-                for (i=0; i<REGSIZE; i=i+1) reg_file[i] <= 32'b0; // rst all registers
+                for (i=0; i<REGSIZE; i=i+1)
+                    reg_file[i] <= 32'b0; // rst all registers
             else
             begin
                 if (WriteEnable && WriteSelect != 0)
