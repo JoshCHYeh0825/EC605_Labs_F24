@@ -69,21 +69,24 @@ module Datapath(clk, rst);
     needs to set the size of the PARAMETERs; the proper format to do so is provided.
     */
 
-    wire [31:0] ReadRegData1, ReadRegData2;
-    wire [31:0] WriteRegData;
+    wire [31:0] ReadRegData1, ReadRegData2, WriteRegData;
+    wire [4:0] ReadSelect1, ReadSelect2, WriteSelect;
     
     assign ReadReg1Address = ReadInstruction[19:15]; // rs1
     assign ReadReg2Address = ReadInstruction[24:20]; // rs2
     assign WriteRegAddress = ReadInstruction[11:7];  // rd
+    assign WriteRegData = ALU_Out; // ALU output back to register
+    assign WriteEnable = RegWrite;  // Enable writing to the register file
+
     
     Register_File #(.BITSIZE(32), .REGSIZE(32)) RF(
         .clk(clk),
         .rst(rst), 
-        .ReadSelect1(ReadReg1Address),
-        .ReadSelect2(ReadReg2Address),
-        .WriteSelect(WriteRegAddress),
+        .ReadSelect1(ReadSelect1),
+        .ReadSelect2(ReadSelect2),
+        .WriteSelect(WriteSelect),
         .WriteData(WriteRegData),
-        .WriteEnable(RegWrite),
+        .WriteEnable(WriteEnable),
         .ReadData1(ReadRegData1),
         .ReadData2(ReadRegData2)
     
