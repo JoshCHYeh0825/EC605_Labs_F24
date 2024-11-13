@@ -8,10 +8,9 @@ module t_Datapath();
 
 initial begin
     clk = 0;
-    rst = 0;
+    rst = 1;
     
-    #20 rst = 1;
-    #1 rst = 0;
+    #20 rst = 0;
 
     forever #5 clk = ~clk;
   end
